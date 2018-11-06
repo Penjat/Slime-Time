@@ -6,15 +6,18 @@ public class MainManager : MonoBehaviour {
 
 	private const string TAG = "MAIN MANAGER: ";
 
-	private GridManager gridManager;
+	private GridManager _gridManager;
+	private InputManager _inputManager;
 
 	void Start () {
 		Debug.Log(TAG + "Starting up.");
 
-		gridManager = GetComponent<GridManager>();
+		_gridManager = GetComponent<GridManager>();
+		_inputManager = GetComponent<InputManager>();
 
-		
-		gridManager.SetUp(this);
+
+		_gridManager.SetUp(this);
+		_inputManager.SetUp(this);
 
 	}
 

@@ -28,6 +28,7 @@ public class GridManager : MonoBehaviour {
 				GameObject g = Instantiate(prefab);
 
 				Square square = g.GetComponent<Square>();
+				square.SetUp(x,z);
 				g.transform.SetParent(_gridCon.transform);
 				g.transform.position = new Vector3(x*spacing,0,z*spacing);
 			}
