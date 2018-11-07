@@ -52,6 +52,8 @@
      <Compile Include="Assets\Scripts\Managers\GridManager.cs" />
      <Compile Include="Assets\Scripts\Managers\InputManager.cs" />
      <Compile Include="Assets\Scripts\Managers\MainManager.cs" />
+     <Compile Include="Assets\Scripts\Managers\PieceManager.cs" />
+     <Compile Include="Assets\Scripts\Slime.cs" />
      <Compile Include="Assets\Scripts\Square.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
