@@ -42,6 +42,7 @@ public class MainManager : MonoBehaviour {
 
 	public void EndTurn(){
 		Debug.Log(TAG + "Ending Player's Turn.");
+		_cardManager.DrawCards();
 	}
 
 
