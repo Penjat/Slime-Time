@@ -9,6 +9,7 @@ public class MainManager : MonoBehaviour {
 	private GridManager _gridManager;
 	private InputManager _inputManager;
 	private CardManager _cardManager;
+	private TurnManager _turnManager;
 
 	private PieceManager _pieceManager;
 
@@ -19,14 +20,16 @@ public class MainManager : MonoBehaviour {
 		_inputManager = GetComponent<InputManager>();
 		_cardManager = GetComponent<CardManager>();
 		_pieceManager = GetComponent<PieceManager>();
+		_turnManager = new TurnManager();
 
 		CardEffectManager cardEffectManager = GetComponent<CardEffectManager>();
 
 
+		_turnManager.SetUp(this);
 		_gridManager.SetUp(this);
 		_pieceManager.SetUp(this);
 		_cardManager.SetUp(this,cardEffectManager,_pieceManager,_gridManager);
-		_inputManager.SetUp(this,_cardManager);
+		_inputManager.SetUp(this,_cardManager,_turnManager);
 
 	}
 
@@ -46,6 +49,20 @@ public class MainManager : MonoBehaviour {
 	public void EndTurn(){
 		Debug.Log(TAG + "Ending Player's Turn.");
 		_cardManager.DrawCards();
+		StartEnemyTurn();
+	}
+	public void StartEnemyTurn(){
+		Debug.Log(TAG + "Starting Enemy's Turn.");
+		_turnManager.SetTurn(TurnManager.Turn.ENEMY);
+		EndEnemyTurn();
+	}
+	public void EndEnemyTurn(){
+		Debug.Log(TAG + "Ending Enemy's Turn.");
+		StartPlayerTurn();
+	}
+	public void StartPlayerTurn(){
+		Debug.Log(TAG + "Starting Player's Turn.");
+		_turnManager.SetTurn(TurnManager.Turn.PLAYER);
 	}
 
 
