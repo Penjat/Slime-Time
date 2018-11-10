@@ -9,6 +9,7 @@ public class MainManager : MonoBehaviour {
 	private GridManager _gridManager;
 	private InputManager _inputManager;
 	private CardManager _cardManager;
+
 	private PieceManager _pieceManager;
 
 	void Start () {
@@ -19,10 +20,12 @@ public class MainManager : MonoBehaviour {
 		_cardManager = GetComponent<CardManager>();
 		_pieceManager = GetComponent<PieceManager>();
 
+		CardEffectManager cardEffectManager = GetComponent<CardEffectManager>();
+
 
 		_gridManager.SetUp(this);
-		_cardManager.SetUp(this);
 		_pieceManager.SetUp(this);
+		_cardManager.SetUp(this,cardEffectManager,_pieceManager,_gridManager);
 		_inputManager.SetUp(this,_cardManager);
 
 	}
