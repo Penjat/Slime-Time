@@ -7,6 +7,7 @@ public class Square : MonoBehaviour {
 	private int _x,_z;
 
 	private Slime _slime;
+	
 
 	public Animator animator;
 
