@@ -10,7 +10,7 @@ public class MainManager : MonoBehaviour {
 	private InputManager _inputManager;
 	private CardManager _cardManager;
 	private TurnManager _turnManager;
-
+	private CardEffectManager _cardEffectManager;
 	private PieceManager _pieceManager;
 
 	void Start () {
@@ -22,14 +22,13 @@ public class MainManager : MonoBehaviour {
 		_pieceManager = GetComponent<PieceManager>();
 		_turnManager = new TurnManager();
 		DeckManager deckManager = new DeckManager();
-
-		CardEffectManager cardEffectManager = GetComponent<CardEffectManager>();
+		_cardEffectManager = GetComponent<CardEffectManager>();
 
 
 		_turnManager.SetUp(this);
 		_gridManager.SetUp(this);
 		_pieceManager.SetUp(this);
-		_cardManager.SetUp(this,cardEffectManager,_pieceManager,_gridManager,deckManager);
+		_cardManager.SetUp(this,_cardEffectManager,_pieceManager,_gridManager,deckManager);
 		_inputManager.SetUp(this,_cardManager,_turnManager);
 
 	}
@@ -38,9 +37,13 @@ public class MainManager : MonoBehaviour {
 		Debug.Log(TAG + "a square was pressed. "+ "x = " + square.GetX() + " z = " + square.GetZ());
 
 		//called when a square is pressed
-		//must figure out which manager will handel this
-
-		//_pieceManager.CreatePiece(_gridManager,square);
+	
+		//check if the cardEffectManager is waiting for input
+		if(_cardEffectManager.IsWaiting()){
+			Debug.Log(TAG + "card manager is waiting for input.");
+			_cardEffectManager.SquarePressed(square);
+			return;
+		}
 		_cardManager.SquarePressed(square);
 	}
 	public void CardPressed(Card card){
