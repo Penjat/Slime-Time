@@ -30,6 +30,7 @@ public class MainManager : MonoBehaviour {
 		_turnManager.SetUp(this);
 		_gridManager.SetUp(this);
 		_pieceManager.SetUp(this);
+		_ballManager.SetUp(this,_gridManager);
 		_cardManager.SetUp(this,_cardEffectManager,_pieceManager,_gridManager,deckManager,_ballManager);
 		_inputManager.SetUp(this,_cardManager,_turnManager);
 
@@ -55,7 +56,8 @@ public class MainManager : MonoBehaviour {
 	public void EndTurn(){
 		Debug.Log(TAG + "Ending Player's Turn.");
 		_cardManager.DrawCards();
-		StartEnemyTurn();
+		_ballManager.MoveBalls();
+		//StartEnemyTurn();
 	}
 	public void StartEnemyTurn(){
 		Debug.Log(TAG + "Starting Enemy's Turn.");
