@@ -46,8 +46,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Ball.cs" />
      <Compile Include="Assets\Scripts\Card.cs" />
      <Compile Include="Assets\Scripts\CardRef.cs" />
+     <Compile Include="Assets\Scripts\Managers\BallManager.cs" />
      <Compile Include="Assets\Scripts\Managers\Calc.cs" />
      <Compile Include="Assets\Scripts\Managers\CardEffectManager.cs" />
      <Compile Include="Assets\Scripts\Managers\CardManager.cs" />
