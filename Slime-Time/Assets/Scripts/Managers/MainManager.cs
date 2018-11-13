@@ -54,23 +54,43 @@ public class MainManager : MonoBehaviour {
 	}
 
 	public void EndTurn(){
+		if(!_turnManager.CheckTurn(Turn.PLAYER_PLAY)){
+			return;
+		}
 		Debug.Log(TAG + "Ending Player's Turn.");
-		_cardManager.DrawCards();
+		//
 		_ballManager.MoveBalls();
 		//StartEnemyTurn();
+		_turnManager.SetTurn(Turn.PLAYER_MOVE);
+	}
+	public void DoneMoving(){
+		//called by the ball manager when all the balls are done moving
+
+		//if it is the player's turn
+		Debug.Log(TAG + "done moving balls.");
+		if(_turnManager.CheckTurn(Turn.PLAYER_MOVE)){
+			StartEnemyTurn();
+			return;
+		}
+		//if it is enemies turn
+		StartPlayerTurn();
 	}
 	public void StartEnemyTurn(){
 		Debug.Log(TAG + "Starting Enemy's Turn.");
-		//_turnManager.SetTurn(TurnManager.Turn.ENEMY);
+
+		_turnManager.SetTurn(Turn.ENEMY_PLAY);
 		EndEnemyTurn();
 	}
 	public void EndEnemyTurn(){
 		Debug.Log(TAG + "Ending Enemy's Turn.");
-		StartPlayerTurn();
+		_turnManager.SetTurn(Turn.ENEMY_MOVE);
+		_ballManager.MoveBalls();
+
 	}
 	public void StartPlayerTurn(){
 		Debug.Log(TAG + "Starting Player's Turn.");
-		//_turnManager.SetTurn(TurnManager.Turn.PLAYER);
+		_turnManager.SetTurn(Turn.PLAYER_PLAY);
+		_cardManager.DrawCards();
 	}
 
 
