@@ -32,6 +32,9 @@ public class GridManager : MonoBehaviour {
 	public void SetUp(MainManager mainManager){
 		_mainManager = mainManager;
 
+		//CreateGrid();
+	}
+	public void StartBattle(){
 		CreateGrid();
 	}
 

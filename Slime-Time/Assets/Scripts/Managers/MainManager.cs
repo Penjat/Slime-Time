@@ -6,6 +6,7 @@ public class MainManager : MonoBehaviour {
 
 	private const string TAG = "MAIN MANAGER: ";
 
+	private MenuManager _menuManager;
 	private GridManager _gridManager;
 	private InputManager _inputManager;
 	private CardManager _cardManager;
@@ -17,6 +18,7 @@ public class MainManager : MonoBehaviour {
 	void Start () {
 		Debug.Log(TAG + "Starting up.");
 
+		_menuManager = GetComponent<MenuManager>();
 		_gridManager = GetComponent<GridManager>();
 		_inputManager = GetComponent<InputManager>();
 		_cardManager = GetComponent<CardManager>();
@@ -34,7 +36,33 @@ public class MainManager : MonoBehaviour {
 		_cardManager.SetUp(this,_cardEffectManager,_pieceManager,_gridManager,deckManager,_ballManager);
 		_inputManager.SetUp(this,_cardManager,_turnManager);
 
+		ToTitle();
 	}
+
+	public void ToTitle(){
+		_menuManager.NavigateMenu(Menu.TITLE);
+	}
+	public void StartGame(){
+		//TODO Load game data
+		ToWorldMap();
+	}
+	public void RedyForBattle(){
+		_menuManager.NavigateMenu(Menu.PRE_BATTLE);
+	}
+	public void StartBattle(){
+		_menuManager.NavigateMenu(Menu.BATTLE);
+		//TODO pass in info about the battle
+		_gridManager.StartBattle();
+		_cardManager.StartBattle();
+	}
+	public void ToWorldMap(){
+		_menuManager.NavigateMenu(Menu.WORLD_MAP);
+	}
+	public void EndBattle(){
+		//TODO win or lose
+		_menuManager.NavigateMenu( (Menu)((int)Menu.BATTLE + (int)Menu.BATTLE_OVER));
+	}
+
 
 	public void SqaurePressed(Square square){
 		Debug.Log(TAG + "a square was pressed. "+ "x = " + square.GetX() + " z = " + square.GetZ());
@@ -92,6 +120,8 @@ public class MainManager : MonoBehaviour {
 		_turnManager.SetTurn(Turn.PLAYER_PLAY);
 		_cardManager.DrawCards();
 	}
+
+
 
 
 }
