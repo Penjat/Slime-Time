@@ -58,9 +58,20 @@ public class MainManager : MonoBehaviour {
 	public void ToWorldMap(){
 		_menuManager.NavigateMenu(Menu.WORLD_MAP);
 	}
-	public void EndBattle(){
+	public void RepacpBattle(){
+		//shows win lose data, stats about how the battle went and what was won
 		//TODO win or lose
 		_menuManager.NavigateMenu( (Menu)((int)Menu.BATTLE + (int)Menu.BATTLE_OVER));
+	}
+	public void LeaveBattle(){
+		//clears all the battle elements: cards,grid
+		//called from the battle over menu
+		_gridManager.EndBattle();
+		_cardManager.EndBattle();
+		_pieceManager.EndBattle();
+		_ballManager.EndBattle();
+
+		ToWorldMap();
 	}
 
 

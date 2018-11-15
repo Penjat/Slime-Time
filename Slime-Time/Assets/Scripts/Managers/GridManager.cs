@@ -85,5 +85,11 @@ public class GridManager : MonoBehaviour {
 			default: return square;
 		}
 	}
+	public void EndBattle(){
+		foreach(Square square in _grid){
+			Destroy(square.gameObject);
+		}
+
+	}
 
 }
